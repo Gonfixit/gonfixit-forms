@@ -1,0 +1,9 @@
+{
+  "id": "flores-elena",
+  "form": "diagnostico",
+  "agent": "Richard",
+  "title": "Cuestionario para Flores Elena",
+  "intro": "Hola, José Miguel. Como hablamos, estas son las preguntas que nos ayudan a preparar el diagnóstico de la floristería antes de vernos después del Pilar. Son cinco minutos y no hay respuestas buenas ni malas.",
+  "preset": { "nombre_empresa": "Flores Elena", "sector": "floristerias", "ciudad": "Zaragoza" },
+  "skip": ["nombre_empresa", "sector", "ciudad"]
+}
