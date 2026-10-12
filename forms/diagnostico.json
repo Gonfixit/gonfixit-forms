@@ -7,7 +7,7 @@
   "intro": "Diez minutos para contarnos cómo funciona tu negocio hoy: cómo te llegan los clientes, cómo lo gestionas, qué haces para que vuelvan y qué quieres conseguir. Con tus respuestas preparamos un pre-diagnóstico al momento y un responsable de GONFIXIT lo revisa y te llama en menos de 24 horas laborables.",
   "duration": "10 min · unas 45 preguntas, casi todas de un toque",
   "next_steps": [
-    "Al terminar ves tu pre-diagnóstico en pantalla: dónde se te va el dinero y qué arreglar primero.",
+    "Al terminar ves tu pre-diagnóstico en pantalla: dónde se te va el dinero y cuánto.",
     "Un responsable de GONFIXIT lo revisa y te llama en menos de 24 h laborables.",
     "Primera sesión de 45 minutos para afinarlo y decidir el plan."
   ],
@@ -262,7 +262,7 @@
     ] },
     { "key": "detalle_vuelven", "section": "vuelven", "type": "textarea", "required": false, "max": 1500, "label": "¿Algo más sobre tus clientes de siempre?", "help": "Opcional. Qué les gusta, por qué crees que vuelven o dejan de venir.", "placeholder": "" },
 
-    { "key": "problema_principal", "section": "objetivo", "type": "single", "required": true, "label": "¿Cuál es el freno principal ahora mismo?", "options": [
+    { "key": "problema_principal", "section": "objetivo", "type": "multi", "required": true, "label": "¿Cuáles son los frenos principales ahora mismo?", "help": "Marca todos los que te pasen. El primero que marques es el que más te duele.", "options": [
       { "value": "pocos_clientes", "label": "Me faltan clientes nuevos" },
       { "value": "no_vuelven", "label": "Vienen una vez y no vuelven" },
       { "value": "reservas_noshows", "label": "Citas o reservas que fallan" },
@@ -315,8 +315,10 @@
     "title": "Recibido. Gracias.",
     "text": "Un responsable de GONFIXIT revisa tus respuestas y te escribe en menos de 24 horas laborables con dos o tres huecos para la primera sesión.",
     "title_diag": "Tu pre-diagnóstico.",
-    "text_diag": "Esto es lo que vemos con lo que nos has contado. Un responsable de GONFIXIT lo revisa y te escribe en menos de 24 horas laborables para afinarlo contigo.",
-    "diag_note": "Orientativo: está hecho con tus respuestas, sin ver el negocio. Las cifras son estimaciones con tus propios números. Sin precios: eso lo hablamos en persona.",
+    "text_diag": "Esto es lo que vemos con lo que nos has contado: dónde se te está yendo el dinero y cuánto, con tus propios números.",
+    "next_title": "Qué pasa ahora",
+    "next_text": "Cómo tapar cada fuga, en qué orden y con qué lo arreglamos te lo cuenta un responsable de GONFIXIT en una llamada de 20 minutos. Te escribe en menos de 24 horas laborables para proponerte hora.",
+    "diag_note": "Orientativo: está hecho con tus respuestas, sin ver el negocio. Las cifras son estimaciones. Sin precios: eso lo hablamos en persona.",
     "whatsapp": "https://wa.me/34692558492?text=Hola%20Gonfixit%2C%20acabo%20de%20enviar%20el%20cuestionario.",
     "whatsapp_label": "¿Tienes prisa? Escríbenos por WhatsApp",
     "site": "https://gonfixit.com",

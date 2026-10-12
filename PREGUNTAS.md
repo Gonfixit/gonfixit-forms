@@ -166,7 +166,7 @@ Los datos que nos des en este cuestionario los trata GONFIXIT con un único fin:
 
 ## Qué quieres conseguir
 
-44. **¿Cuál es el freno principal ahora mismo?** *
+44. **¿Cuáles son los frenos principales ahora mismo?** * (varias opciones)
    Me faltan clientes nuevos · Vienen una vez y no vuelven · Citas o reservas que fallan · Contactos y presupuestos sin seguimiento · Demasiado trabajo a mano · Las plataformas se llevan demasiada comisión · La web no trae nada o no la tengo · No tengo datos para decidir · Gasto en marketing sin ver retorno · Otro
 
 45. **Si en tres meses solo cambiara una cosa, ¿cuál tendría que ser?** *
