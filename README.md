@@ -49,7 +49,7 @@ cuestionario y cliente viene; `ConsentVersion` y `ConsentMarketing` guardan el c
 
 ## Publicar
 
-Cada push a `main` despliega en GitHub Pages. Para el dominio: en Hostinger (DNS de gonfixit.com) un registro
+Producción: Hostinger, sitio forms.gonfixit.com con despliegue Git desde este repositorio (rama main, auto-deploy). Preview: GitHub Pages en gonfixit.github.io/gonfixit-forms.
 `CNAME` con nombre `forms` apuntando a `gonfixit.github.io`. GitHub emite el certificado HTTPS solo.
 
 ## Desarrollo local
