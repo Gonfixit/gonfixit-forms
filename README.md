@@ -3,7 +3,7 @@
 Cuestionarios de GONFIXIT (diagnóstico y los que vengan) con la estética de la marca: una pregunta por
 pantalla, consentimiento RGPD antes de empezar, resumen editable y envío al CRM.
 
-Sitio estático: no necesita servidor. Se publica con GitHub Pages y se sirve en `forms.gonfixit.com`.
+Sitio estático: no necesita servidor. Producción en Hostinger (forms.gonfixit.com) con despliegue automático desde la rama main; preview en GitHub Pages.
 Las respuestas van a `https://gonfixit.com/api/forms` (servidor Express del repo `gonfixit-web`), que las
 guarda en Airtable (base GONFIXIT CRM, tabla `leads`, estado «por revisar») y avisa por correo.
 
@@ -16,7 +16,6 @@ assets/forms.js       motor: carga el JSON, pinta pantallas, valida, guarda borr
 forms/<id>.json       definición de cada cuestionario (preguntas, consentimiento, textos)
 clients/<id>.json     personalización por cliente: saludo, respuestas ya rellenas, preguntas que se saltan
 PREGUNTAS.md          las preguntas del diagnóstico en texto, para revisarlas sin abrir el JSON
-(CNAME se añade cuando el DNS de forms.gonfixit.com esté creado; hasta entonces el preview vive en gonfixit.github.io/gonfixit-forms/)
 ```
 
 ## Enlaces
@@ -50,7 +49,7 @@ cuestionario y cliente viene; `ConsentVersion` y `ConsentMarketing` guardan el c
 ## Publicar
 
 Producción: Hostinger, sitio forms.gonfixit.com con despliegue Git desde este repositorio (rama main, auto-deploy). Preview: GitHub Pages en gonfixit.github.io/gonfixit-forms.
-`CNAME` con nombre `forms` apuntando a `gonfixit.github.io`. GitHub emite el certificado HTTPS solo.
+El despliegue automático lo gestiona la app de GitHub conectada en hPanel (Avanzado → Git): cada push a main se publica solo, sin webhook manual.
 
 ## Desarrollo local
 
