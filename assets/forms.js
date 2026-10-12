@@ -25,6 +25,7 @@
 
   var form = null, client = null, questions = [], answers = {}, consent = { accepted: false, marketing: false };
   var step = -1; // -1 bienvenida · 0..n-1 preguntas · n resumen · n+1 gracias
+  var diagnostico = null; // pre-diagnóstico devuelto por la API (o muestra en preview)
   var DRAFT_KEY = 'gonfixit-forms:' + FORM_ID + (CLIENT_ID ? ':' + CLIENT_ID : '');
 
   /* ── utilidades ───────────────────────────────────────── */
@@ -160,8 +161,23 @@
 
   function thanks() {
     var t = form.thanks;
-    return '<div class="thanks"><span class="mark" aria-hidden="true">✓</span><h1>' + esc(t.title) + '</h1><p class="lead">' + esc(t.text) + '</p>' +
-      '<div class="actions"><a class="btn btn--primary" href="' + esc(t.whatsapp) + '" target="_blank" rel="noopener">' + esc(t.whatsapp_label) + '</a><a class="btn btn--line" href="' + esc(t.site) + '">' + esc(t.site_label) + '</a></div></div>';
+    var d = diagnostico;
+    var h = '<div class="thanks"><span class="mark" aria-hidden="true">✓</span><h1>' + esc(d ? (t.title_diag || t.title) : t.title) + '</h1><p class="lead">' + esc(d ? (t.text_diag || t.text) : t.text) + '</p>';
+    if (d) {
+      h += '<section class="diag">' +
+        '<p class="kicker">Pre-diagnóstico</p><p class="diag-sum">' + esc(d.resumen) + '</p>' +
+        '<h2 class="diag-h">Dónde se te está yendo</h2><ol class="fugas">' + (d.fugas || []).map(function (f) {
+          return '<li><strong>' + esc(f.titulo) + '</strong><p>' + esc(f.por_que) + '</p><p class="imp">' + esc(f.impacto_mes) + '</p></li>';
+        }).join('') + '</ol>' +
+        '<h2 class="diag-h">Qué arreglar y en qué orden</h2><ol class="prio">' + (d.prioridad || []).map(function (p) {
+          return '<li><strong>' + esc(p.arreglo) + '</strong> <span class="plazo">' + esc(p.plazo) + '</span><p>' + esc(p.resuelve) + '</p></li>';
+        }).join('') + '</ol>' +
+        '<h2 class="diag-h">Primer paso</h2><p class="paso">' + esc(d.primer_paso) + '</p>' +
+        '<p class="diag-note">' + esc(t.diag_note || '') + '</p>' +
+      '</section>';
+    }
+    h += '<div class="actions"><a class="btn btn--primary" href="' + esc(t.whatsapp) + '" target="_blank" rel="noopener">' + esc(t.whatsapp_label) + '</a><a class="btn btn--line" href="' + esc(t.site) + '">' + esc(t.site_label) + '</a></div></div>';
+    return h;
   }
 
   /* ── interacción ──────────────────────────────────────── */
@@ -240,7 +256,7 @@
 
   /* ── envío ────────────────────────────────────────────── */
   function submit() {
-    var btn = document.getElementById('send'); btn.disabled = true; setStatus('Enviando…');
+    var btn = document.getElementById('send'); btn.disabled = true; setStatus('Enviando y preparando tu pre-diagnóstico… puede tardar un minuto. No cierres la página.');
     var payload = {
       form: form.id, version: form.version, client: CLIENT_ID || null, lang: form.lang || 'es',
       answers: questions.map(function (q) { return { key: q.key, section: q.section, question: q.label, value: answers[q.key] === undefined ? '' : answers[q.key], answer: readable(q) }; }),
@@ -248,11 +264,11 @@
       meta: { url: location.href, referrer: document.referrer || '', sent_at: new Date().toISOString() },
       honeypot: ''
     };
-    if (PREVIEW) { setTimeout(function () { clearDraft(); show(questions.length + 1); }, 500); return; }
+    if (PREVIEW) { diagnostico = form.preview_diagnostico || null; setTimeout(function () { clearDraft(); show(questions.length + 1); }, 800); return; }
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.ok, status: r.status, json: j }; }); })
       .then(function (res) {
-        if (res.ok) { clearDraft(); show(questions.length + 1); return; }
+        if (res.ok) { diagnostico = res.json.diagnostico || null; clearDraft(); show(questions.length + 1); return; }
         btn.disabled = false;
         if (res.status === 429) return setStatus('Demasiados envíos seguidos. Espera unos minutos y vuelve a intentarlo.');
         if (res.status === 400 && res.json.issues) return setStatus('Hay respuestas que no hemos podido validar: ' + Object.keys(res.json.issues).join(', ') + '.');

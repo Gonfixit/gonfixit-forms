@@ -21,180 +21,799 @@
     "privacy_label": "Política de privacidad completa"
   },
   "sections": [
-    { "id": "negocio", "title": "Tu negocio" },
-    { "id": "clientes", "title": "Cómo te llegan los clientes" },
-    { "id": "gestion", "title": "Cómo lo gestionas hoy" },
-    { "id": "objetivo", "title": "Qué quieres conseguir" },
-    { "id": "contacto", "title": "Dónde te respondemos" }
+    {
+      "id": "negocio",
+      "title": "Tu negocio"
+    },
+    {
+      "id": "clientes",
+      "title": "Cómo te llegan los clientes"
+    },
+    {
+      "id": "gestion",
+      "title": "Cómo lo gestionas hoy"
+    },
+    {
+      "id": "objetivo",
+      "title": "Qué quieres conseguir"
+    },
+    {
+      "id": "contacto",
+      "title": "Dónde te respondemos"
+    }
   ],
   "questions": [
-    { "key": "nombre_empresa", "section": "negocio", "type": "text", "required": true, "label": "¿Cómo se llama tu negocio?", "placeholder": "Nombre comercial", "autocomplete": "organization", "max": 120 },
-    { "key": "sector", "section": "negocio", "type": "single", "required": true, "label": "¿A qué se dedica?", "help": "Elige lo que más se parezca.", "options": [
-      { "value": "restaurantes", "label": "Bar, restaurante o cafetería" },
-      { "value": "heladerias", "label": "Heladería, panadería o alimentación" },
-      { "value": "clinicas", "label": "Clínica, estética o salud" },
-      { "value": "barberias", "label": "Barbería o peluquería" },
-      { "value": "tatuaje", "label": "Estudio de tatuaje" },
-      { "value": "floristerias", "label": "Floristería" },
-      { "value": "hoteles", "label": "Hotel o alojamiento" },
-      { "value": "constructoras", "label": "Constructora o reformas" },
-      { "value": "inmobiliarias", "label": "Inmobiliaria" },
-      { "value": "telecom", "label": "Telecom o equipo comercial" },
-      { "value": "otros", "label": "Otro sector" }
-    ] },
-    { "key": "ciudad", "section": "negocio", "type": "text", "required": true, "label": "¿En qué ciudad o zona estáis?", "placeholder": "Zaragoza, Logroño, Lérida…", "autocomplete": "address-level2", "max": 80 },
-    { "key": "antiguedad", "section": "negocio", "type": "single", "required": true, "label": "¿Cuánto lleva en marcha?", "options": [
-      { "value": "menos1", "label": "Menos de 1 año" },
-      { "value": "1-3", "label": "De 1 a 3 años" },
-      { "value": "3-10", "label": "De 3 a 10 años" },
-      { "value": "mas10", "label": "Más de 10 años" }
-    ] },
-    { "key": "tamano", "section": "negocio", "type": "single", "required": true, "label": "¿Cuántas personas trabajáis?", "options": [
-      { "value": "solo", "label": "Solo yo" },
-      { "value": "2-5", "label": "De 2 a 5" },
-      { "value": "6-15", "label": "De 6 a 15" },
-      { "value": "16-50", "label": "De 16 a 50" },
-      { "value": "50+", "label": "Más de 50" }
-    ] },
-    { "key": "web", "section": "negocio", "type": "text", "required": false, "label": "¿Tienes web o Instagram?", "help": "Opcional. Nos sirve para echar un vistazo antes de la sesión.", "placeholder": "tunegocio.com o @tunegocio", "inputmode": "url", "max": 200 },
-    { "key": "ficha_google", "section": "negocio", "type": "single", "required": true, "label": "Tu ficha de Google, la que sale en Maps, ¿cómo está?", "options": [
-      { "value": "cuidada", "label": "La tengo y la cuido: fotos, horarios y reseñas al día" },
-      { "value": "abandonada", "label": "La tengo, pero no la toco desde hace tiempo" },
-      { "value": "no", "label": "No tengo o no la he reclamado" },
-      { "value": "nose", "label": "No lo sé" }
-    ] },
-
-    { "key": "canales", "section": "clientes", "type": "multi", "required": true, "label": "¿Por dónde te llegan los clientes hoy?", "help": "Marca todo lo que aplique.", "options": [
-      { "value": "boca_a_boca", "label": "Boca a boca y clientes de siempre" },
-      { "value": "google", "label": "Google y Maps" },
-      { "value": "redes", "label": "Instagram, TikTok u otras redes" },
-      { "value": "plataformas", "label": "Plataformas: Glovo, Booking, portales, marketplaces" },
-      { "value": "paso", "label": "Gente que pasa por delante" },
-      { "value": "publicidad", "label": "Publicidad pagada" },
-      { "value": "otros", "label": "Otros" }
-    ] },
-    { "key": "contacto_via", "section": "clientes", "type": "multi", "required": true, "label": "¿Cómo te contactan o te piden?", "help": "Marca todo lo que aplique.", "options": [
-      { "value": "whatsapp", "label": "WhatsApp" },
-      { "value": "llamada", "label": "Llamada de teléfono" },
-      { "value": "web", "label": "Formulario o reservas en la web" },
-      { "value": "redes", "label": "Mensajes en redes" },
-      { "value": "presencial", "label": "En persona, en el local" },
-      { "value": "plataforma", "label": "A través de una plataforma" }
-    ] },
-    { "key": "volumen", "section": "clientes", "type": "single", "required": true, "label": "¿Cuántos contactos, citas o pedidos manejas a la semana?", "options": [
-      { "value": "menos10", "label": "Menos de 10" },
-      { "value": "10-30", "label": "Entre 10 y 30" },
-      { "value": "30-100", "label": "Entre 30 y 100" },
-      { "value": "mas100", "label": "Más de 100" }
-    ] },
-    { "key": "perdida", "section": "clientes", "type": "single", "required": true, "label": "¿Cuántos se pierden por el camino?", "help": "Mensajes sin responder, citas que no aparecen, presupuestos que no se cierran.", "options": [
-      { "value": "casi_nada", "label": "Casi ninguno" },
-      { "value": "1de10", "label": "Uno de cada diez" },
-      { "value": "1de4", "label": "Uno de cada cuatro" },
-      { "value": "mas", "label": "Más de uno de cada cuatro" },
-      { "value": "nose", "label": "No lo sé, no lo mido" }
-    ] },
-    { "key": "reparto", "section": "clientes", "type": "single", "required": true, "showIf": { "key": "sector", "in": ["restaurantes", "heladerias"] }, "label": "¿Trabajas con plataformas de reparto como Glovo, Uber Eats o Just Eat?", "options": [
-      { "value": "mucho", "label": "Sí, son una parte importante de las ventas" },
-      { "value": "algo", "label": "Sí, pero poca cosa" },
-      { "value": "no", "label": "No" }
-    ] },
-    { "key": "noshows", "section": "clientes", "type": "single", "required": true, "showIf": { "key": "sector", "in": ["clinicas", "barberias", "tatuaje"] }, "label": "¿Cuántas citas se te caen a la semana sin avisar?", "options": [
-      { "value": "0-1", "label": "Ninguna o una" },
-      { "value": "2-5", "label": "Entre 2 y 5" },
-      { "value": "6-10", "label": "Entre 6 y 10" },
-      { "value": "mas10", "label": "Más de 10" }
-    ] },
-    { "key": "ota", "section": "clientes", "type": "single", "required": true, "showIf": { "key": "sector", "in": ["hoteles"] }, "label": "¿Qué parte de tus reservas llega por Booking u otras plataformas?", "options": [
-      { "value": "menos25", "label": "Menos de una cuarta parte" },
-      { "value": "25-50", "label": "Entre un cuarto y la mitad" },
-      { "value": "mas50", "label": "Más de la mitad" },
-      { "value": "nose", "label": "No lo sé" }
-    ] },
-    { "key": "presupuestos", "section": "clientes", "type": "single", "required": true, "showIf": { "key": "sector", "in": ["inmobiliarias", "constructoras", "telecom"] }, "label": "De los presupuestos o visitas que haces al mes, ¿cuántos se cierran?", "options": [
-      { "value": "mayoria", "label": "La mayoría" },
-      { "value": "mitad", "label": "Más o menos la mitad" },
-      { "value": "pocos", "label": "Pocos" },
-      { "value": "nose", "label": "No lo mido" }
-    ] },
-    { "key": "encargos", "section": "clientes", "type": "single", "required": true, "showIf": { "key": "sector", "in": ["floristerias"] }, "label": "¿Qué parte de tus ventas son encargos: bodas, eventos, fechas señaladas?", "options": [
-      { "value": "mayoria", "label": "La mayoría" },
-      { "value": "mitad", "label": "Más o menos la mitad" },
-      { "value": "pocos", "label": "Una parte pequeña" },
-      { "value": "nose", "label": "No lo mido" }
-    ] },
-
-    { "key": "herramientas", "section": "gestion", "type": "multi", "required": true, "label": "¿Con qué llevas el día a día?", "help": "Marca todo lo que uses.", "options": [
-      { "value": "papel", "label": "Papel o agenda física" },
-      { "value": "excel", "label": "Excel o Google Sheets" },
-      { "value": "whatsapp", "label": "WhatsApp, sin más" },
-      { "value": "agenda_online", "label": "Agenda o reservas online" },
-      { "value": "crm", "label": "CRM o base de datos de clientes" },
-      { "value": "tpv", "label": "TPV o programa de gestión" },
-      { "value": "plataforma", "label": "Plataforma de reparto o reservas de terceros" },
-      { "value": "otro", "label": "Otra cosa" }
-    ] },
-    { "key": "ya_tienes_sistemas", "section": "gestion", "type": "single", "required": true, "label": "¿Dirías que tienes sistemas montados?", "options": [
-      { "value": "no", "label": "No, todo a mano: WhatsApp, Excel, papel" },
-      { "value": "si_desordenados", "label": "Sí, pero desordenados o sin conectar" },
-      { "value": "si_ok", "label": "Sí, y funcionan razonablemente" }
-    ] },
-    { "key": "horas_manuales", "section": "gestion", "type": "single", "required": true, "label": "¿Cuántas horas a la semana se van en tareas a mano?", "help": "Responder mensajes, apuntar citas, pasar pedidos, confirmar, reclamar.", "options": [
-      { "value": "menos2", "label": "Menos de 2" },
-      { "value": "2-5", "label": "Entre 2 y 5" },
-      { "value": "5-10", "label": "Entre 5 y 10" },
-      { "value": "mas10", "label": "Más de 10" }
-    ] },
-    { "key": "quien_gestiona", "section": "gestion", "type": "single", "required": true, "label": "¿Quién lo lleva?", "options": [
-      { "value": "yo", "label": "Yo, entre todo lo demás" },
-      { "value": "una_persona", "label": "Una persona del equipo" },
-      { "value": "varios", "label": "Varias personas, según el día" },
-      { "value": "nadie", "label": "Nadie fijo" }
-    ] },
-
-    { "key": "problema_principal", "section": "objetivo", "type": "single", "required": true, "label": "¿Cuál es el freno principal ahora mismo?", "options": [
-      { "value": "pocos_clientes", "label": "Me faltan clientes nuevos" },
-      { "value": "no_vuelven", "label": "Vienen una vez y no vuelven" },
-      { "value": "reservas_noshows", "label": "Citas o reservas que fallan" },
-      { "value": "leads_sin_seguimiento", "label": "Contactos y presupuestos sin seguimiento" },
-      { "value": "tareas_manuales", "label": "Demasiado trabajo a mano" },
-      { "value": "comisiones", "label": "Las plataformas se llevan demasiada comisión" },
-      { "value": "web", "label": "La web no trae nada o no la tengo" },
-      { "value": "datos_dispersos", "label": "No tengo datos para decidir" },
-      { "value": "marketing_sin_retorno", "label": "Gasto en marketing sin ver retorno" },
-      { "value": "otro", "label": "Otro" }
-    ] },
-    { "key": "objetivo", "section": "objetivo", "type": "textarea", "required": true, "min": 10, "max": 1000, "label": "Si en tres meses solo cambiara una cosa, ¿cuál tendría que ser?", "placeholder": "Por ejemplo: dejar de perder reservas los fines de semana, o que la mitad de los clientes vuelvan en el mes." },
-    { "key": "intentado", "section": "objetivo", "type": "textarea", "required": false, "max": 1000, "label": "¿Qué has probado ya y qué pasó?", "help": "Opcional.", "placeholder": "Una app de reservas que nadie usó, anuncios que no trajeron nada, una web que se quedó a medias." },
-    { "key": "urgencia", "section": "objetivo", "type": "single", "required": true, "label": "¿Cómo de urgente es?", "options": [
-      { "value": "baja", "label": "Baja · estoy explorando" },
-      { "value": "media", "label": "Media · quiero arreglarlo este trimestre" },
-      { "value": "alta", "label": "Alta · me cuesta dinero cada semana" }
-    ] },
-    { "key": "presupuesto", "section": "objetivo", "type": "single", "required": false, "label": "¿Qué inversión te planteas?", "help": "Opcional y orientativo. Sirve para proponerte lo que encaje, no para encarecerlo.", "options": [
-      { "value": "", "label": "Aún no lo sé" },
-      { "value": "menos500", "label": "Menos de 500 €" },
-      { "value": "500-2000", "label": "Entre 500 y 2.000 €" },
-      { "value": "2000-5000", "label": "Entre 2.000 y 5.000 €" },
-      { "value": "mas5000", "label": "Más de 5.000 €" }
-    ] },
-    { "key": "problema_detalle", "section": "objetivo", "type": "textarea", "required": false, "max": 2000, "label": "¿Algo más que debamos saber?", "help": "Opcional. Dos frases bastan; lo concretamos en la llamada.", "placeholder": "" },
-
-    { "key": "persona_contacto", "section": "contacto", "type": "text", "required": true, "label": "¿Con quién hablamos?", "placeholder": "Nombre y apellido", "autocomplete": "name", "max": 100 },
-    { "key": "cargo", "section": "contacto", "type": "single", "required": true, "label": "¿Cuál es tu papel en el negocio?", "options": [
-      { "value": "propietario", "label": "Propietario o socio" },
-      { "value": "gerente", "label": "Gerente o encargado" },
-      { "value": "equipo", "label": "Parte del equipo" },
-      { "value": "otro", "label": "Otro" }
-    ] },
-    { "key": "email", "section": "contacto", "type": "email", "required": true, "label": "¿A qué correo te escribimos?", "placeholder": "nombre@tunegocio.com", "autocomplete": "email" },
-    { "key": "telefono", "section": "contacto", "type": "tel", "required": true, "label": "¿Y tu teléfono o WhatsApp?", "placeholder": "+34 600 000 000", "autocomplete": "tel", "min": 6, "max": 30 },
-    { "key": "horario", "section": "contacto", "type": "single", "required": false, "label": "¿Cuándo te viene bien que te llamemos?", "options": [
-      { "value": "indiferente", "label": "Cuando sea, me adapto" },
-      { "value": "manana", "label": "Por la mañana" },
-      { "value": "tarde", "label": "Por la tarde" },
-      { "value": "whatsapp", "label": "Mejor por WhatsApp, sin llamada" }
-    ] }
+    {
+      "key": "nombre_empresa",
+      "section": "negocio",
+      "type": "text",
+      "required": true,
+      "label": "¿Cómo se llama tu negocio?",
+      "placeholder": "Nombre comercial",
+      "autocomplete": "organization",
+      "max": 120
+    },
+    {
+      "key": "sector",
+      "section": "negocio",
+      "type": "single",
+      "required": true,
+      "label": "¿A qué se dedica?",
+      "help": "Elige lo que más se parezca.",
+      "options": [
+        {
+          "value": "restaurantes",
+          "label": "Bar, restaurante o cafetería"
+        },
+        {
+          "value": "heladerias",
+          "label": "Heladería, panadería o alimentación"
+        },
+        {
+          "value": "clinicas",
+          "label": "Clínica, estética o salud"
+        },
+        {
+          "value": "barberias",
+          "label": "Barbería o peluquería"
+        },
+        {
+          "value": "tatuaje",
+          "label": "Estudio de tatuaje"
+        },
+        {
+          "value": "floristerias",
+          "label": "Floristería"
+        },
+        {
+          "value": "hoteles",
+          "label": "Hotel o alojamiento"
+        },
+        {
+          "value": "constructoras",
+          "label": "Constructora o reformas"
+        },
+        {
+          "value": "inmobiliarias",
+          "label": "Inmobiliaria"
+        },
+        {
+          "value": "telecom",
+          "label": "Telecom o equipo comercial"
+        },
+        {
+          "value": "otros",
+          "label": "Otro sector"
+        }
+      ]
+    },
+    {
+      "key": "ciudad",
+      "section": "negocio",
+      "type": "text",
+      "required": true,
+      "label": "¿En qué ciudad o zona estáis?",
+      "placeholder": "Zaragoza, Logroño, Lérida…",
+      "autocomplete": "address-level2",
+      "max": 80
+    },
+    {
+      "key": "antiguedad",
+      "section": "negocio",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuánto lleva en marcha?",
+      "options": [
+        {
+          "value": "menos1",
+          "label": "Menos de 1 año"
+        },
+        {
+          "value": "1-3",
+          "label": "De 1 a 3 años"
+        },
+        {
+          "value": "3-10",
+          "label": "De 3 a 10 años"
+        },
+        {
+          "value": "mas10",
+          "label": "Más de 10 años"
+        }
+      ]
+    },
+    {
+      "key": "tamano",
+      "section": "negocio",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuántas personas trabajáis?",
+      "options": [
+        {
+          "value": "solo",
+          "label": "Solo yo"
+        },
+        {
+          "value": "2-5",
+          "label": "De 2 a 5"
+        },
+        {
+          "value": "6-15",
+          "label": "De 6 a 15"
+        },
+        {
+          "value": "16-50",
+          "label": "De 16 a 50"
+        },
+        {
+          "value": "50+",
+          "label": "Más de 50"
+        }
+      ]
+    },
+    {
+      "key": "web",
+      "section": "negocio",
+      "type": "text",
+      "required": false,
+      "label": "¿Tienes web o Instagram?",
+      "help": "Opcional. Nos sirve para echar un vistazo antes de la sesión.",
+      "placeholder": "tunegocio.com o @tunegocio",
+      "inputmode": "url",
+      "max": 200
+    },
+    {
+      "key": "ficha_google",
+      "section": "negocio",
+      "type": "single",
+      "required": true,
+      "label": "Tu ficha de Google, la que sale en Maps, ¿cómo está?",
+      "options": [
+        {
+          "value": "cuidada",
+          "label": "La tengo y la cuido: fotos, horarios y reseñas al día"
+        },
+        {
+          "value": "abandonada",
+          "label": "La tengo, pero no la toco desde hace tiempo"
+        },
+        {
+          "value": "no",
+          "label": "No tengo o no la he reclamado"
+        },
+        {
+          "value": "nose",
+          "label": "No lo sé"
+        }
+      ]
+    },
+    {
+      "key": "canales",
+      "section": "clientes",
+      "type": "multi",
+      "required": true,
+      "label": "¿Por dónde te llegan los clientes hoy?",
+      "help": "Marca todo lo que aplique.",
+      "options": [
+        {
+          "value": "boca_a_boca",
+          "label": "Boca a boca y clientes de siempre"
+        },
+        {
+          "value": "google",
+          "label": "Google y Maps"
+        },
+        {
+          "value": "redes",
+          "label": "Instagram, TikTok u otras redes"
+        },
+        {
+          "value": "plataformas",
+          "label": "Plataformas: Glovo, Booking, portales, marketplaces"
+        },
+        {
+          "value": "paso",
+          "label": "Gente que pasa por delante"
+        },
+        {
+          "value": "publicidad",
+          "label": "Publicidad pagada"
+        },
+        {
+          "value": "otros",
+          "label": "Otros"
+        }
+      ]
+    },
+    {
+      "key": "contacto_via",
+      "section": "clientes",
+      "type": "multi",
+      "required": true,
+      "label": "¿Cómo te contactan o te piden?",
+      "help": "Marca todo lo que aplique.",
+      "options": [
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp"
+        },
+        {
+          "value": "llamada",
+          "label": "Llamada de teléfono"
+        },
+        {
+          "value": "web",
+          "label": "Formulario o reservas en la web"
+        },
+        {
+          "value": "redes",
+          "label": "Mensajes en redes"
+        },
+        {
+          "value": "presencial",
+          "label": "En persona, en el local"
+        },
+        {
+          "value": "plataforma",
+          "label": "A través de una plataforma"
+        }
+      ]
+    },
+    {
+      "key": "volumen",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuántos contactos, citas o pedidos manejas a la semana?",
+      "options": [
+        {
+          "value": "menos10",
+          "label": "Menos de 10"
+        },
+        {
+          "value": "10-30",
+          "label": "Entre 10 y 30"
+        },
+        {
+          "value": "30-100",
+          "label": "Entre 30 y 100"
+        },
+        {
+          "value": "mas100",
+          "label": "Más de 100"
+        }
+      ]
+    },
+    {
+      "key": "perdida",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuántos se pierden por el camino?",
+      "help": "Mensajes sin responder, citas que no aparecen, presupuestos que no se cierran.",
+      "options": [
+        {
+          "value": "casi_nada",
+          "label": "Casi ninguno"
+        },
+        {
+          "value": "1de10",
+          "label": "Uno de cada diez"
+        },
+        {
+          "value": "1de4",
+          "label": "Uno de cada cuatro"
+        },
+        {
+          "value": "mas",
+          "label": "Más de uno de cada cuatro"
+        },
+        {
+          "value": "nose",
+          "label": "No lo sé, no lo mido"
+        }
+      ]
+    },
+    {
+      "key": "reparto",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "showIf": {
+        "key": "sector",
+        "in": [
+          "restaurantes",
+          "heladerias"
+        ]
+      },
+      "label": "¿Trabajas con plataformas de reparto como Glovo, Uber Eats o Just Eat?",
+      "options": [
+        {
+          "value": "mucho",
+          "label": "Sí, son una parte importante de las ventas"
+        },
+        {
+          "value": "algo",
+          "label": "Sí, pero poca cosa"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "key": "noshows",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "showIf": {
+        "key": "sector",
+        "in": [
+          "clinicas",
+          "barberias",
+          "tatuaje"
+        ]
+      },
+      "label": "¿Cuántas citas se te caen a la semana sin avisar?",
+      "options": [
+        {
+          "value": "0-1",
+          "label": "Ninguna o una"
+        },
+        {
+          "value": "2-5",
+          "label": "Entre 2 y 5"
+        },
+        {
+          "value": "6-10",
+          "label": "Entre 6 y 10"
+        },
+        {
+          "value": "mas10",
+          "label": "Más de 10"
+        }
+      ]
+    },
+    {
+      "key": "ota",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "showIf": {
+        "key": "sector",
+        "in": [
+          "hoteles"
+        ]
+      },
+      "label": "¿Qué parte de tus reservas llega por Booking u otras plataformas?",
+      "options": [
+        {
+          "value": "menos25",
+          "label": "Menos de una cuarta parte"
+        },
+        {
+          "value": "25-50",
+          "label": "Entre un cuarto y la mitad"
+        },
+        {
+          "value": "mas50",
+          "label": "Más de la mitad"
+        },
+        {
+          "value": "nose",
+          "label": "No lo sé"
+        }
+      ]
+    },
+    {
+      "key": "presupuestos",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "showIf": {
+        "key": "sector",
+        "in": [
+          "inmobiliarias",
+          "constructoras",
+          "telecom"
+        ]
+      },
+      "label": "De los presupuestos o visitas que haces al mes, ¿cuántos se cierran?",
+      "options": [
+        {
+          "value": "mayoria",
+          "label": "La mayoría"
+        },
+        {
+          "value": "mitad",
+          "label": "Más o menos la mitad"
+        },
+        {
+          "value": "pocos",
+          "label": "Pocos"
+        },
+        {
+          "value": "nose",
+          "label": "No lo mido"
+        }
+      ]
+    },
+    {
+      "key": "encargos",
+      "section": "clientes",
+      "type": "single",
+      "required": true,
+      "showIf": {
+        "key": "sector",
+        "in": [
+          "floristerias"
+        ]
+      },
+      "label": "¿Qué parte de tus ventas son encargos: bodas, eventos, fechas señaladas?",
+      "options": [
+        {
+          "value": "mayoria",
+          "label": "La mayoría"
+        },
+        {
+          "value": "mitad",
+          "label": "Más o menos la mitad"
+        },
+        {
+          "value": "pocos",
+          "label": "Una parte pequeña"
+        },
+        {
+          "value": "nose",
+          "label": "No lo mido"
+        }
+      ]
+    },
+    {
+      "key": "herramientas",
+      "section": "gestion",
+      "type": "multi",
+      "required": true,
+      "label": "¿Con qué llevas el día a día?",
+      "help": "Marca todo lo que uses.",
+      "options": [
+        {
+          "value": "papel",
+          "label": "Papel o agenda física"
+        },
+        {
+          "value": "excel",
+          "label": "Excel o Google Sheets"
+        },
+        {
+          "value": "whatsapp",
+          "label": "WhatsApp, sin más"
+        },
+        {
+          "value": "agenda_online",
+          "label": "Agenda o reservas online"
+        },
+        {
+          "value": "crm",
+          "label": "CRM o base de datos de clientes"
+        },
+        {
+          "value": "tpv",
+          "label": "TPV o programa de gestión"
+        },
+        {
+          "value": "plataforma",
+          "label": "Plataforma de reparto o reservas de terceros"
+        },
+        {
+          "value": "otro",
+          "label": "Otra cosa"
+        }
+      ]
+    },
+    {
+      "key": "ya_tienes_sistemas",
+      "section": "gestion",
+      "type": "single",
+      "required": true,
+      "label": "¿Dirías que tienes sistemas montados?",
+      "options": [
+        {
+          "value": "no",
+          "label": "No, todo a mano: WhatsApp, Excel, papel"
+        },
+        {
+          "value": "si_desordenados",
+          "label": "Sí, pero desordenados o sin conectar"
+        },
+        {
+          "value": "si_ok",
+          "label": "Sí, y funcionan razonablemente"
+        }
+      ]
+    },
+    {
+      "key": "horas_manuales",
+      "section": "gestion",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuántas horas a la semana se van en tareas a mano?",
+      "help": "Responder mensajes, apuntar citas, pasar pedidos, confirmar, reclamar.",
+      "options": [
+        {
+          "value": "menos2",
+          "label": "Menos de 2"
+        },
+        {
+          "value": "2-5",
+          "label": "Entre 2 y 5"
+        },
+        {
+          "value": "5-10",
+          "label": "Entre 5 y 10"
+        },
+        {
+          "value": "mas10",
+          "label": "Más de 10"
+        }
+      ]
+    },
+    {
+      "key": "quien_gestiona",
+      "section": "gestion",
+      "type": "single",
+      "required": true,
+      "label": "¿Quién lo lleva?",
+      "options": [
+        {
+          "value": "yo",
+          "label": "Yo, entre todo lo demás"
+        },
+        {
+          "value": "una_persona",
+          "label": "Una persona del equipo"
+        },
+        {
+          "value": "varios",
+          "label": "Varias personas, según el día"
+        },
+        {
+          "value": "nadie",
+          "label": "Nadie fijo"
+        }
+      ]
+    },
+    {
+      "key": "problema_principal",
+      "section": "objetivo",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuál es el freno principal ahora mismo?",
+      "options": [
+        {
+          "value": "pocos_clientes",
+          "label": "Me faltan clientes nuevos"
+        },
+        {
+          "value": "no_vuelven",
+          "label": "Vienen una vez y no vuelven"
+        },
+        {
+          "value": "reservas_noshows",
+          "label": "Citas o reservas que fallan"
+        },
+        {
+          "value": "leads_sin_seguimiento",
+          "label": "Contactos y presupuestos sin seguimiento"
+        },
+        {
+          "value": "tareas_manuales",
+          "label": "Demasiado trabajo a mano"
+        },
+        {
+          "value": "comisiones",
+          "label": "Las plataformas se llevan demasiada comisión"
+        },
+        {
+          "value": "web",
+          "label": "La web no trae nada o no la tengo"
+        },
+        {
+          "value": "datos_dispersos",
+          "label": "No tengo datos para decidir"
+        },
+        {
+          "value": "marketing_sin_retorno",
+          "label": "Gasto en marketing sin ver retorno"
+        },
+        {
+          "value": "otro",
+          "label": "Otro"
+        }
+      ]
+    },
+    {
+      "key": "objetivo",
+      "section": "objetivo",
+      "type": "textarea",
+      "required": true,
+      "min": 10,
+      "max": 1000,
+      "label": "Si en tres meses solo cambiara una cosa, ¿cuál tendría que ser?",
+      "placeholder": "Por ejemplo: dejar de perder reservas los fines de semana, o que la mitad de los clientes vuelvan en el mes."
+    },
+    {
+      "key": "intentado",
+      "section": "objetivo",
+      "type": "textarea",
+      "required": false,
+      "max": 1000,
+      "label": "¿Qué has probado ya y qué pasó?",
+      "help": "Opcional.",
+      "placeholder": "Una app de reservas que nadie usó, anuncios que no trajeron nada, una web que se quedó a medias."
+    },
+    {
+      "key": "urgencia",
+      "section": "objetivo",
+      "type": "single",
+      "required": true,
+      "label": "¿Cómo de urgente es?",
+      "options": [
+        {
+          "value": "baja",
+          "label": "Baja · estoy explorando"
+        },
+        {
+          "value": "media",
+          "label": "Media · quiero arreglarlo este trimestre"
+        },
+        {
+          "value": "alta",
+          "label": "Alta · me cuesta dinero cada semana"
+        }
+      ]
+    },
+    {
+      "key": "presupuesto",
+      "section": "objetivo",
+      "type": "single",
+      "required": false,
+      "label": "¿Qué inversión te planteas?",
+      "help": "Opcional y orientativo. Sirve para proponerte lo que encaje, no para encarecerlo.",
+      "options": [
+        {
+          "value": "",
+          "label": "Aún no lo sé"
+        },
+        {
+          "value": "menos500",
+          "label": "Menos de 500 €"
+        },
+        {
+          "value": "500-2000",
+          "label": "Entre 500 y 2.000 €"
+        },
+        {
+          "value": "2000-5000",
+          "label": "Entre 2.000 y 5.000 €"
+        },
+        {
+          "value": "mas5000",
+          "label": "Más de 5.000 €"
+        }
+      ]
+    },
+    {
+      "key": "problema_detalle",
+      "section": "objetivo",
+      "type": "textarea",
+      "required": false,
+      "max": 2000,
+      "label": "¿Algo más que debamos saber?",
+      "help": "Opcional. Dos frases bastan; lo concretamos en la llamada.",
+      "placeholder": ""
+    },
+    {
+      "key": "persona_contacto",
+      "section": "contacto",
+      "type": "text",
+      "required": true,
+      "label": "¿Con quién hablamos?",
+      "placeholder": "Nombre y apellido",
+      "autocomplete": "name",
+      "max": 100
+    },
+    {
+      "key": "cargo",
+      "section": "contacto",
+      "type": "single",
+      "required": true,
+      "label": "¿Cuál es tu papel en el negocio?",
+      "options": [
+        {
+          "value": "propietario",
+          "label": "Propietario o socio"
+        },
+        {
+          "value": "gerente",
+          "label": "Gerente o encargado"
+        },
+        {
+          "value": "equipo",
+          "label": "Parte del equipo"
+        },
+        {
+          "value": "otro",
+          "label": "Otro"
+        }
+      ]
+    },
+    {
+      "key": "email",
+      "section": "contacto",
+      "type": "email",
+      "required": true,
+      "label": "¿A qué correo te escribimos?",
+      "placeholder": "nombre@tunegocio.com",
+      "autocomplete": "email"
+    },
+    {
+      "key": "telefono",
+      "section": "contacto",
+      "type": "tel",
+      "required": true,
+      "label": "¿Y tu teléfono o WhatsApp?",
+      "placeholder": "+34 600 000 000",
+      "autocomplete": "tel",
+      "min": 6,
+      "max": 30
+    },
+    {
+      "key": "horario",
+      "section": "contacto",
+      "type": "single",
+      "required": false,
+      "label": "¿Cuándo te viene bien que te llamemos?",
+      "options": [
+        {
+          "value": "indiferente",
+          "label": "Cuando sea, me adapto"
+        },
+        {
+          "value": "manana",
+          "label": "Por la mañana"
+        },
+        {
+          "value": "tarde",
+          "label": "Por la tarde"
+        },
+        {
+          "value": "whatsapp",
+          "label": "Mejor por WhatsApp, sin llamada"
+        }
+      ]
+    }
   ],
   "thanks": {
     "title": "Recibido. Gracias.",
@@ -202,6 +821,47 @@
     "whatsapp": "https://wa.me/34692558492?text=Hola%20Gonfixit%2C%20acabo%20de%20enviar%20el%20cuestionario.",
     "whatsapp_label": "¿Tienes prisa? Escríbenos por WhatsApp",
     "site": "https://gonfixit.com",
-    "site_label": "Volver a gonfixit.com"
+    "site_label": "Volver a gonfixit.com",
+    "title_diag": "Tu pre-diagnóstico.",
+    "text_diag": "Esto es lo que vemos con lo que nos has contado. Un responsable comercial de GONFIXIT lo revisa y te escribe en menos de 24 horas laborables para afinarlo contigo.",
+    "diag_note": "Orientativo: está hecho con tus respuestas, sin ver el negocio. Las cifras son estimaciones con tus propios números. Sin precios: eso lo hablamos en persona."
+  },
+  "preview_diagnostico": {
+    "resumen": "Floristería con más de tres años en Zaragoza, dos a cinco personas y entre 30 y 100 contactos a la semana, en gran parte encargos. Se gestiona con papel y WhatsApp, y una de cada cuatro peticiones se queda por el camino.",
+    "fugas": [
+      {
+        "titulo": "Encargos que no se cierran",
+        "por_que": "Los pedidos entran por WhatsApp y en persona, se apuntan en papel y nadie los persigue. Uno de cada cuatro se pierde.",
+        "impacto_mes": "unos 10 encargos/semana perdidos × 35 € de ticket estimado × 4 = 1.400 €/mes"
+      },
+      {
+        "titulo": "Clientes de fechas señaladas que no vuelven",
+        "por_que": "No hay lista de clientes ni avisos: quien encargó en San Valentín no recibe nada antes del Día de la Madre.",
+        "impacto_mes": "sin datos suficientes; se calcula en la sesión con el histórico de encargos"
+      },
+      {
+        "titulo": "Horas a mano cada semana",
+        "por_que": "Entre 5 y 10 horas en apuntar, confirmar y reclamar que podrían automatizarse.",
+        "impacto_mes": "8 h/semana × 4 = 32 h/mes de la dueña"
+      }
+    ],
+    "prioridad": [
+      {
+        "arreglo": "Base de clientes y encargos con recordatorio",
+        "resuelve": "Cada encargo con fecha, estado y aviso automático al cliente. Deja de perderse el uno de cada cuatro.",
+        "plazo": "1 semana"
+      },
+      {
+        "arreglo": "Fidelización digital por fechas",
+        "resuelve": "Aviso al móvil dos semanas antes de cada fecha señalada a quien ya compró. Convierte compradores de una vez en clientes que vuelven.",
+        "plazo": "1 semana"
+      },
+      {
+        "arreglo": "Ficha de Google al día",
+        "resuelve": "Fotos, horarios y reseñas para que los encargos de gente nueva lleguen sin pagar publicidad.",
+        "plazo": "3 a 4 semanas"
+      }
+    ],
+    "primer_paso": "Pasar los encargos de las próximas dos semanas a una lista única con fecha y teléfono, y mandar el primer recordatorio automático."
   }
 }

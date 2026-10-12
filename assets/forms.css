@@ -106,6 +106,20 @@ textarea.in{resize:vertical;min-height:96px;font-size:clamp(18px,2.4vw,22px);lin
 /* gracias */
 .thanks .mark{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:var(--botella);color:var(--cream);font:700 26px/1 var(--display);margin-bottom:18px}
 
+/* pre-diagnóstico en la pantalla final */
+.diag{margin-top:28px;padding:22px 24px;background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r-lg);text-align:left}
+.diag .kicker{margin-bottom:6px}
+.diag-sum{margin:0;font-size:17px;line-height:1.5}
+.diag-h{margin:22px 0 10px;font-size:15px;letter-spacing:.02em;text-transform:uppercase;color:var(--orange-ink)}
+.fugas,.prio{margin:0;padding:0 0 0 22px;display:grid;gap:12px}
+.fugas li,.prio li{font-size:15.5px;line-height:1.45}
+.fugas p,.prio p{margin:3px 0 0;color:var(--ink-soft)}
+.fugas .imp{color:var(--orange-ink);font-weight:600}
+.prio .plazo{display:inline-block;margin-left:6px;padding:1px 8px;border:1px solid var(--rule);border-radius:999px;font-size:12.5px;color:var(--ink-mute)}
+.paso{margin:0;padding:12px 14px;background:var(--paper-2);border-radius:var(--r);font-weight:500}
+.diag-note{margin:16px 0 0;font-size:13px;color:var(--ink-mute)}
+.thanks .diag{animation:in .4s ease both}
+
 /* pie */
 .bottom{border-top:1px solid var(--rule);padding:14px 0 calc(14px + env(safe-area-inset-bottom));background:var(--paper)}
 .bottom .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
