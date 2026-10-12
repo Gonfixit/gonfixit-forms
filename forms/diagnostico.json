@@ -14,7 +14,7 @@
   "consent": {
     "version": "2026-10-13",
     "title": "Antes de empezar: tus datos",
-    "text": "Los datos que nos des en este cuestionario los trata GONFIXIT con un único fin: preparar tu diagnóstico y ponernos en contacto contigo para presentártelo. No los vendemos ni los cedemos a terceros. Para redactar el pre-diagnóstico, tus respuestas se procesan con el servicio de Anthropic (Claude), que no las usa para otra cosa. Se guardan en nuestro CRM (Airtable, con las garantías del RGPD) mientras dure la relación comercial y puedes pedir acceso, rectificación o borrado escribiendo a richard@gonfixit.com.",
+    "text": "Los datos que nos des en este cuestionario los trata GONFIXIT con un único fin: preparar tu diagnóstico y ponernos en contacto contigo para presentártelo. No los vendemos ni los cedemos a terceros. Se guardan en nuestro CRM (Airtable, con las garantías del RGPD) mientras dure la relación comercial y puedes pedir acceso, rectificación o borrado escribiendo a richard@gonfixit.com.",
     "accept_label": "He leído la información y acepto que GONFIXIT trate mis datos para preparar el diagnóstico y contactarme.",
     "marketing_label": "Quiero recibir, de vez en cuando, ideas y casos de GONFIXIT por correo (opcional, puedes darte de baja cuando quieras).",
     "privacy_url": "https://gonfixit.com/privacidad",
