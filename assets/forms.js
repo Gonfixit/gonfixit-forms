@@ -43,10 +43,14 @@
     return form.questions.filter(function (q) {
       if (skip.indexOf(q.key) !== -1) return false;
       if (!q.showIf) return true;
-      var v = answers[q.showIf.key];
-      if (q.showIf.in) return q.showIf.in.indexOf(v) !== -1;
-      if (q.showIf.eq !== undefined) return v === q.showIf.eq;
-      return true;
+      return [].concat(q.showIf).every(function (c) {
+        var v = answers[c.key];
+        var arr = Array.isArray(v) ? v : [v];
+        if (c.in) return arr.some(function (x) { return c.in.indexOf(x) !== -1; });
+        if (c.notIn) return !arr.some(function (x) { return c.notIn.indexOf(x) !== -1; });
+        if (c.eq !== undefined) return v === c.eq;
+        return true;
+      });
     });
   }
   function optionLabel(q, v) { var o = (q.options || []).filter(function (o) { return o.value === v; })[0]; return o ? o.label : v; }
