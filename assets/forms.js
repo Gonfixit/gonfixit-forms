@@ -26,6 +26,7 @@
   var form = null, client = null, questions = [], answers = {}, consent = { accepted: false, marketing: false };
   var step = -1; // -1 bienvenida · 0..n-1 preguntas · n resumen · n+1 gracias
   var diagnostico = null; // pre-diagnóstico devuelto por la API (o muestra en preview)
+  var informe = null; // enlace al informe para el cliente (PDF), si la API lo devuelve
   var DRAFT_KEY = 'gonfixit-forms:' + FORM_ID + (CLIENT_ID ? ':' + CLIENT_ID : '');
 
   /* ── utilidades ───────────────────────────────────────── */
@@ -167,16 +168,17 @@
       h += '<section class="diag">' +
         '<p class="kicker">Pre-diagnóstico</p><p class="diag-sum">' + esc(d.resumen) + '</p>' +
         '<h2 class="diag-h">Dónde se te está yendo</h2><ol class="fugas">' + (d.fugas || []).map(function (f) {
-          return '<li><strong>' + esc(f.titulo) + '</strong><p>' + esc(f.por_que) + '</p><p class="imp">' + esc(f.impacto_mes) + '</p></li>';
+          return '<li><strong>' + esc(f.titulo) + '</strong><p>' + esc(f.por_que) + '</p><p class="imp">' + esc(f.impacto_mes) + '</p>' + (f.solucion ? '<p class="sol">Solución: ' + esc(f.solucion) + '</p>' : '') + '</li>';
         }).join('') + '</ol>' +
         '<h2 class="diag-h">Qué arreglar y en qué orden</h2><ol class="prio">' + (d.prioridad || []).map(function (p) {
           return '<li><strong>' + esc(p.arreglo) + '</strong> <span class="plazo">' + esc(p.plazo) + '</span><p>' + esc(p.resuelve) + '</p></li>';
         }).join('') + '</ol>' +
+        ((d.plan && d.plan.length) ? '<h2 class="diag-h">Plan paso a paso</h2><ol class="plan">' + d.plan.map(function (p) { return '<li><strong>' + esc(p.semana) + '</strong> · ' + esc(p.accion) + '<p>' + esc(p.quien) + ' · ' + esc(p.entregable) + '</p></li>'; }).join('') + '</ol>' : '') +
         '<h2 class="diag-h">Primer paso</h2><p class="paso">' + esc(d.primer_paso) + '</p>' +
         '<p class="diag-note">' + esc(t.diag_note || '') + '</p>' +
       '</section>';
     }
-    h += '<div class="actions"><a class="btn btn--primary" href="' + esc(t.whatsapp) + '" target="_blank" rel="noopener">' + esc(t.whatsapp_label) + '</a><a class="btn btn--line" href="' + esc(t.site) + '">' + esc(t.site_label) + '</a></div></div>';
+    h += '<div class="actions">' + (informe ? '<a class="btn btn--primary" href="' + esc(informe) + '" target="_blank" rel="noopener">Descargar el informe en PDF</a>' : '') + '<a class="btn' + (informe ? ' btn--line' : ' btn--primary') + '" href="' + esc(t.whatsapp) + '" target="_blank" rel="noopener">' + esc(t.whatsapp_label) + '</a><a class="btn btn--line" href="' + esc(t.site) + '">' + esc(t.site_label) + '</a></div></div>';
     return h;
   }
 
@@ -264,11 +266,11 @@
       meta: { url: location.href, referrer: document.referrer || '', sent_at: new Date().toISOString() },
       honeypot: ''
     };
-    if (PREVIEW) { diagnostico = form.preview_diagnostico || null; setTimeout(function () { clearDraft(); show(questions.length + 1); }, 800); return; }
+    if (PREVIEW) { diagnostico = form.preview_diagnostico || null; informe = null; setTimeout(function () { clearDraft(); show(questions.length + 1); }, 800); return; }
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.ok, status: r.status, json: j }; }); })
       .then(function (res) {
-        if (res.ok) { diagnostico = res.json.diagnostico || null; clearDraft(); show(questions.length + 1); return; }
+        if (res.ok) { diagnostico = res.json.diagnostico || null; informe = res.json.informe || null; clearDraft(); show(questions.length + 1); return; }
         btn.disabled = false;
         if (res.status === 429) return setStatus('Demasiados envíos seguidos. Espera unos minutos y vuelve a intentarlo.');
         if (res.status === 400 && res.json.issues) return setStatus('Hay respuestas que no hemos podido validar: ' + Object.keys(res.json.issues).join(', ') + '.');

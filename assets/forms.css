@@ -115,6 +115,10 @@ textarea.in{resize:vertical;min-height:96px;font-size:clamp(18px,2.4vw,22px);lin
 .fugas li,.prio li{font-size:15.5px;line-height:1.45}
 .fugas p,.prio p{margin:3px 0 0;color:var(--ink-soft)}
 .fugas .imp{color:var(--orange-ink);font-weight:600}
+.fugas .sol{color:var(--botella);font-weight:500}
+.plan{margin:0;padding:0 0 0 22px;display:grid;gap:10px}
+.plan li{font-size:15px;line-height:1.45}
+.plan p{margin:2px 0 0;color:var(--ink-mute);font-size:14px}
 .prio .plazo{display:inline-block;margin-left:6px;padding:1px 8px;border:1px solid var(--rule);border-radius:999px;font-size:12.5px;color:var(--ink-mute)}
 .paso{margin:0;padding:12px 14px;background:var(--paper-2);border-radius:var(--r);font-weight:500}
 .diag-note{margin:16px 0 0;font-size:13px;color:var(--ink-mute)}
