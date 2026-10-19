@@ -129,6 +129,7 @@
   "thanks": {
     "title": "Recibido. Gracias.",
     "text": "Un responsable de GONFIXIT revisa tus respuestas y te escribe en menos de 24 horas laborables con dos o tres huecos para la primera sesión.",
+    "text_pending": "Tus respuestas han llegado bien. Tu pre-diagnóstico está tardando un poco más de lo normal: te lo mandamos por correo en cuanto esté y un responsable de GONFIXIT te escribe en menos de 24 horas laborables.",
     "title_diag": "Tu pre-diagnóstico.",
     "text_diag": "Esto es lo que vemos con lo que nos has contado: dónde se te está yendo el dinero y cuánto, con tus propios números.",
     "next_title": "Qué pasa ahora",

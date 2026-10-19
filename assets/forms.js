@@ -26,6 +26,7 @@
   var form = null, client = null, questions = [], answers = {}, consent = { accepted: false, marketing: false };
   var step = -1; // -1 bienvenida · 0..n-1 preguntas · n resumen · n+1 gracias
   var diagnostico = null; // pre-diagnóstico devuelto por la API (o muestra en preview)
+  var sinDiagnostico = false; // el envío entró pero el diagnóstico no llegó a tiempo: va por correo
   var DRAFT_KEY = 'gonfixit-forms:' + FORM_ID + (CLIENT_ID ? ':' + CLIENT_ID : '');
 
   /* ── utilidades ───────────────────────────────────────── */
@@ -166,7 +167,7 @@
   function thanks() {
     var t = form.thanks;
     var d = diagnostico;
-    var h = '<div class="thanks"><span class="mark" aria-hidden="true">✓</span><h1>' + esc(d ? (t.title_diag || t.title) : t.title) + '</h1><p class="lead">' + esc(d ? (t.text_diag || t.text) : t.text) + '</p>';
+    var h = '<div class="thanks"><span class="mark" aria-hidden="true">✓</span><h1>' + esc(d ? (t.title_diag || t.title) : t.title) + '</h1><p class="lead">' + esc(d ? (t.text_diag || t.text) : (sinDiagnostico && t.text_pending) || t.text) + '</p>';
     if (d) {
       h += '<section class="diag">' +
         '<p class="kicker">Pre-diagnóstico</p><p class="diag-sum">' + esc(d.resumen) + '</p>' +
@@ -179,6 +180,26 @@
     }
     h += '<div class="actions"><a class="btn btn--primary" href="' + esc(t.whatsapp) + '" target="_blank" rel="noopener">' + esc(t.whatsapp_label) + '</a><a class="btn btn--line" href="' + esc(t.site) + '">' + esc(t.site_label) + '</a></div></div>';
     return h;
+  }
+
+  /* El servidor responde al instante y prepara el diagnóstico detrás: preguntamos cada 4 s hasta 5 min */
+  var ESPERA = ['Leyendo tus respuestas…', 'Calculando dónde se te va el dinero…', 'Comparando con negocios parecidos…', 'Redactando tu pre-diagnóstico…', 'Ya casi está, un momento más…'];
+  function esperar(job) {
+    var inicio = Date.now(), n = 0;
+    function tick() {
+      var i = Math.min(ESPERA.length - 1, Math.floor((Date.now() - inicio) / 30000));
+      setStatus(ESPERA[i] + ' No cierres la página.');
+      fetch(API + '/estado/' + job, { cache: 'no-store' })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, json: j }; }); })
+        .then(function (res) {
+          var j = res.json || {};
+          if (res.status === 200 && j.estado === 'listo') { diagnostico = j.diagnostico || null; sinDiagnostico = !diagnostico; return show(questions.length + 1); }
+          if (res.status === 404 || j.estado === 'error' || Date.now() - inicio > 300000) { sinDiagnostico = true; return show(questions.length + 1); }
+          n += 1; setTimeout(tick, 4000);
+        })
+        .catch(function () { if (Date.now() - inicio > 300000) { sinDiagnostico = true; return show(questions.length + 1); } setTimeout(tick, 6000); });
+    }
+    tick();
   }
 
   /* ── interacción ──────────────────────────────────────── */
@@ -269,6 +290,7 @@
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.ok, status: r.status, json: j }; }); })
       .then(function (res) {
+        if (res.ok && res.json.pendiente && res.json.job) { clearDraft(); return esperar(res.json.job); }
         if (res.ok) { diagnostico = res.json.diagnostico || null; clearDraft(); show(questions.length + 1); return; }
         btn.disabled = false;
         if (res.status === 429) return setStatus('Demasiados envíos seguidos. Espera unos minutos y vuelve a intentarlo.');
