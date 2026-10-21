@@ -25,6 +25,9 @@ PREGUNTAS.md          las preguntas del diagnóstico en texto, para revisarlas s
 | Diagnóstico general | `https://forms.gonfixit.com/?f=diagnostico` |
 | Personalizado para un cliente | `https://forms.gonfixit.com/?f=diagnostico&c=flores-elena` |
 | Prueba sin enviar al CRM | añade `&preview=1` |
+| **Datos para el contrato (alta de cliente)** | `https://forms.gonfixit.com/?f=alta` · personalizado: `&c=puro-cakes` |
+
+**Alta de cliente (`forms/alta.json`).** Lo rellena el cliente cuando ya ha aceptado el presupuesto, antes del contrato: empresa o autónomo, razón social, NIF/CIF, domicilio fiscal, quién firma (con su DNI), cómo paga (transferencia o domiciliación, con IBAN) y el email de facturación. Sin pre-diagnóstico. El servidor lo manda por correo a GONFIXIT y al CRM como `tipo: alta` (ficha del cliente lista para «Cerrar venta» y la página de firma salta el paso de datos). Funciona aunque Airtable no responda: el correo sale igual y el CRM lo guarda en cola. Para un cliente concreto, crea `clients/<slug>.json` con `"form": "alta"` (ejemplo: `puro-cakes.json`).
 
 ## Cómo se adapta a cada cliente
 

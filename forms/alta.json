@@ -1,0 +1,63 @@
+{
+  "id": "alta",
+  "version": "2026-10-21",
+  "lang": "es",
+  "title": "Datos para tu contrato",
+  "kicker": "GONFIXIT · Alta de cliente",
+  "intro": "Para dejar listo tu contrato y las facturas necesitamos estos datos. Son dos minutos: ten a mano el CIF (o tu DNI si facturas como autónomo) y los datos de la persona que firma. Con esto preparamos el contrato y te lo enviamos para firmar.",
+  "duration": "2 min · unas 12 preguntas, casi todas de un toque",
+  "next_steps": [
+    "Con tus datos preparamos el contrato y el acuerdo de protección de datos.",
+    "Te los enviamos por email para revisarlos y firmarlos.",
+    "Arrancamos en la fecha acordada."
+  ],
+  "consent": {
+    "version": "2026-10-21",
+    "title": "Antes de empezar: tus datos",
+    "text": "Los datos que nos des aquí los trata GONFIXIT (Richard González, NIF Y6942902K) con un único fin: preparar tu contrato, emitir las facturas y gestionar el cobro. No los vendemos ni los cedemos a terceros. Se guardan en nuestro CRM (Airtable, con las garantías del RGPD) mientras dure la relación y los plazos legales de conservación de facturas, y puedes pedir acceso, rectificación o borrado escribiendo a richard@gonfixit.com.",
+    "accept_label": "He leído la información y acepto que GONFIXIT trate mis datos para preparar el contrato y la facturación.",
+    "marketing_label": "Quiero recibir, de vez en cuando, ideas y casos de GONFIXIT por correo (opcional, puedes darte de baja cuando quieras).",
+    "privacy_url": "https://gonfixit.com/privacidad",
+    "privacy_label": "Política de privacidad completa"
+  },
+  "sections": [
+    { "id": "negocio", "title": "Quién contrata" },
+    { "id": "fiscal", "title": "Datos fiscales" },
+    { "id": "firma", "title": "Quién firma" },
+    { "id": "cobro", "title": "Cómo pagas" },
+    { "id": "contacto", "title": "Dónde te enviamos el contrato" }
+  ],
+  "questions": [
+    { "key": "nombre_empresa", "section": "negocio", "type": "text", "required": true, "label": "¿Cómo se llama tu negocio?", "placeholder": "Nombre comercial" },
+    { "key": "tipo_fiscal", "section": "negocio", "type": "single", "required": true, "label": "¿Contratas como empresa o como autónomo?", "options": [
+      { "value": "empresa", "label": "Empresa (S.L., S.A., cooperativa…)" },
+      { "value": "autonomo", "label": "Autónomo/a: facturo a mi nombre" }
+    ] },
+    { "key": "razon_social", "section": "fiscal", "type": "text", "required": true, "label": "Razón social de la empresa", "help": "Tal como figura en el CIF, con S.L., S.A.…", "placeholder": "Mi Negocio, S.L.", "showIf": { "key": "tipo_fiscal", "in": ["empresa"] } },
+    { "key": "nombre_titular", "section": "fiscal", "type": "text", "required": true, "label": "Tu nombre y apellidos", "help": "Tal como figuran en tu DNI.", "placeholder": "Nombre y apellidos", "showIf": { "key": "tipo_fiscal", "in": ["autonomo"] } },
+    { "key": "nif", "section": "fiscal", "type": "text", "required": true, "label": "NIF", "help": "Empresa: el CIF (B12345678). Autónomo: tu DNI o NIE.", "placeholder": "B12345678" },
+    { "key": "domicilio", "section": "fiscal", "type": "text", "required": true, "label": "Domicilio fiscal", "help": "Calle, número y piso. Es el que sale en el contrato y en las facturas.", "placeholder": "Calle, número, piso" },
+    { "key": "cp", "section": "fiscal", "type": "text", "required": true, "label": "Código postal", "placeholder": "50001" },
+    { "key": "localidad", "section": "fiscal", "type": "text", "required": true, "label": "Localidad", "placeholder": "Zaragoza" },
+    { "key": "firmante_nombre", "section": "firma", "type": "text", "required": true, "label": "¿Quién firma en nombre de la empresa?", "help": "Nombre y apellidos de la persona con poder para firmar.", "placeholder": "Nombre y apellidos", "showIf": { "key": "tipo_fiscal", "in": ["empresa"] } },
+    { "key": "firmante_cargo", "section": "firma", "type": "text", "required": true, "label": "Su cargo", "placeholder": "Administrador/a, gerente…", "showIf": { "key": "tipo_fiscal", "in": ["empresa"] } },
+    { "key": "firmante_dni", "section": "firma", "type": "text", "required": true, "label": "Su DNI o NIE", "placeholder": "12345678Z", "showIf": { "key": "tipo_fiscal", "in": ["empresa"] } },
+    { "key": "forma_cobro", "section": "cobro", "type": "single", "required": true, "label": "¿Cómo prefieres pagar la cuota mensual?", "options": [
+      { "value": "transferencia", "label": "Transferencia: te mando la factura con el número de cuenta" },
+      { "value": "domiciliacion", "label": "Domiciliación: el recibo se carga en tu cuenta" }
+    ] },
+    { "key": "iban", "section": "cobro", "type": "text", "required": true, "label": "IBAN de la cuenta para el recibo", "help": "Solo lo usamos para domiciliar la cuota mensual. 24 caracteres, empieza por ES.", "placeholder": "ES00 0000 0000 0000 0000 0000", "showIf": { "key": "forma_cobro", "in": ["domiciliacion"] } },
+    { "key": "email", "section": "contacto", "type": "email", "required": true, "label": "¿A qué correo te enviamos el contrato y las facturas?", "placeholder": "tu@correo.com" },
+    { "key": "telefono", "section": "contacto", "type": "tel", "required": true, "label": "¿Y tu teléfono o WhatsApp?", "placeholder": "600 000 000" },
+    { "key": "observaciones", "section": "contacto", "type": "textarea", "required": false, "label": "¿Algo que debamos tener en cuenta para el contrato?", "help": "Otra persona para la facturación, una dirección distinta para el material, fechas que no te vengan bien…", "placeholder": "Opcional" }
+  ],
+  "thanks": {
+    "title": "Recibido. Gracias.",
+    "text": "Con tus datos preparamos el contrato y el acuerdo de protección de datos. Te los enviamos por email para que los revises y los firmes; cualquier duda, por WhatsApp.",
+    "text_pending": "Tus datos han llegado bien. En breve recibes el contrato por email.",
+    "whatsapp": "https://wa.me/34692558492?text=Hola%20Gonfixit%2C%20acabo%20de%20enviar%20mis%20datos%20para%20el%20contrato.",
+    "whatsapp_label": "¿Alguna duda? Escríbenos por WhatsApp",
+    "site": "https://gonfixit.com",
+    "site_label": "Volver a gonfixit.com"
+  }
+}
