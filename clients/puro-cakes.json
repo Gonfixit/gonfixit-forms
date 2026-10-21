@@ -2,8 +2,8 @@
   "id": "puro-cakes",
   "form": "alta",
   "agent": "Richard",
-  "title": "Datos para tu contrato, Izán",
-  "intro": "Hola, Izán. Para dejar listo el contrato de Puro Cakes y las facturas necesito estos datos: el CIF o tu DNI, el domicilio fiscal, quién firma y cómo prefieres pagar la cuota. Son dos minutos; en cuanto los tenga te mando el contrato para firmar y arrancamos el 21 de octubre.",
+  "title": "Datos para tu contrato, Iza",
+  "intro": "Hola, Iza. Para dejar listo el contrato de Puro Cakes y las facturas necesito estos datos: el CIF o tu DNI, el domicilio fiscal, quién firma y cómo prefieres pagar la cuota. Son dos minutos; en cuanto los tenga te mando el contrato para firmar y arrancamos el 21 de octubre.",
   "preset": { "nombre_empresa": "Puro Cakes" },
   "skip": ["nombre_empresa"]
 }
