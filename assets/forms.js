@@ -295,7 +295,7 @@
         btn.disabled = false;
         if (res.status === 429) return setStatus('Demasiados envíos seguidos. Espera unos minutos y vuelve a intentarlo.');
         if (res.status === 400 && res.json.issues) return setStatus('Hay respuestas que no hemos podido validar: ' + Object.keys(res.json.issues).join(', ') + '.');
-        setStatus((res.json && res.json.error) || 'No hemos podido enviarlo. Escríbenos por WhatsApp al +34 692 558 492 y lo resolvemos.');
+        setStatus((res.json && res.json.error) || 'No hemos podido enviarlo. Escríbenos por WhatsApp al +34 630 587 290 y lo resolvemos.');
       })
       .catch(function () { btn.disabled = false; setStatus('Error de conexión. Comprueba la red e inténtalo de nuevo, o escríbenos por WhatsApp.'); });
   }
@@ -312,7 +312,7 @@
     if (client) Object.keys(client.preset || {}).forEach(function (k) { answers[k] = client.preset[k]; });
     show(d && d.step >= 0 && d.step <= visible().length ? d.step : -1);
   }).catch(function (e) {
-    $screen.replaceChildren(el('<div><p class="kicker">GONFIXIT</p><h1>No encontramos este cuestionario.</h1><p class="lead">Comprueba el enlace o escríbenos por WhatsApp al +34 692 558 492.</p></div>'));
+    $screen.replaceChildren(el('<div><p class="kicker">GONFIXIT</p><h1>No encontramos este cuestionario.</h1><p class="lead">Comprueba el enlace o escríbenos por WhatsApp al +34 630 587 290.</p></div>'));
     if (window.console) console.error(e);
   });
 })();
