@@ -15,6 +15,9 @@
   var FORM_ID = (params.get('f') || 'diagnostico').replace(/[^a-z0-9-]/g, '');
   var CLIENT_ID = (params.get('c') || '').replace(/[^a-z0-9-]/g, '');
   var PREVIEW = params.get('preview') === '1';
+  // Modo entrevista: lo rellena Richard con el cliente. Con la clave correcta (?k=) el servidor devuelve el diagnóstico completo.
+  var MODO = params.get('modo') === 'entrevista' ? 'entrevista' : '';
+  var CLAVE = (params.get('k') || '').slice(0, 80);
 
   var $screen = document.getElementById('screen');
   var $prog = document.getElementById('progBar');
@@ -26,8 +29,9 @@
   var form = null, client = null, questions = [], answers = {}, consent = { accepted: false, marketing: false };
   var step = -1; // -1 bienvenida · 0..n-1 preguntas · n resumen · n+1 gracias
   var diagnostico = null; // pre-diagnóstico devuelto por la API (o muestra en preview)
+  var avisos = null; // estado de entrega que devuelve el servidor (correo, CRM)
   var sinDiagnostico = false; // el envío entró pero el diagnóstico no llegó a tiempo: va por correo
-  var DRAFT_KEY = 'gonfixit-forms:' + FORM_ID + (CLIENT_ID ? ':' + CLIENT_ID : '');
+  var DRAFT_KEY = 'gonfixit-forms:' + FORM_ID + (CLIENT_ID ? ':' + CLIENT_ID : '') + (MODO ? ':' + MODO : '');
 
   /* ── utilidades ───────────────────────────────────────── */
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -43,6 +47,7 @@
     var skip = (client && client.skip) || [];
     return form.questions.filter(function (q) {
       if (skip.indexOf(q.key) !== -1) return false;
+      if (q.modo && q.modo !== MODO) return false;
       if (!q.showIf) return true;
       return [].concat(q.showIf).every(function (c) {
         var v = answers[c.key];
@@ -101,6 +106,14 @@
     var c = form.consent;
     var title = (client && client.title) || form.title;
     var intro = (client && client.intro) || form.intro;
+    var E = MODO && form.entrevista;
+    if (E) return '<div class="welcome">' +
+      '<p class="kicker">' + esc(E.kicker) + '</p><h1>' + esc(title) + '</h1><p class="lead">' + esc(E.intro) + '</p>' +
+      '<ul class="meta"><li>' + esc(form.duration) + '</li><li>Se guarda en este dispositivo: puedes parar y seguir</li>' + (CLAVE ? '' : '<li>Sin clave en el enlace: al terminar solo verás la versión corta</li>') + '</ul>' +
+      '<div class="consent" id="consent"><h2>' + esc(c.title) + '</h2>' +
+      '<label class="chk"><input type="checkbox" id="cAccept"' + (consent.accepted ? ' checked' : '') + '> <span>' + esc(E.accept_label) + ' <span class="req">*</span></span></label>' +
+      '<label class="chk"><input type="checkbox" id="cMarketing"' + (consent.marketing ? ' checked' : '') + '> <span>' + esc(c.marketing_label) + '</span></label></div>' +
+      '<div class="actions"><button type="button" class="btn btn--primary" id="start">Empezar la entrevista <span class="sl">//</span></button></div><p class="status" id="status"></p></div>';
     return '<div class="welcome">' +
       '<p class="kicker">' + esc(form.kicker) + '</p>' +
       '<h1>' + esc(title) + '</h1>' +
@@ -167,6 +180,7 @@
   function thanks() {
     var t = form.thanks;
     var d = diagnostico;
+    if (d && d.prioridad) return completo(d).replace('</p><section', (avisos && (avisos.email_error || avisos.panel === 'no entregado') ? ' <strong>Ojo: ' + (avisos.email_error ? 'el correo no ha salido (queda en cola)' : '') + (avisos.email_error && avisos.panel === 'no entregado' ? ' y ' : '') + (avisos.panel === 'no entregado' ? 'no ha llegado al CRM' : '') + '. Guarda el PDF ahora.</strong>' : '') + '</p><section');
     var h = '<div class="thanks"><span class="mark" aria-hidden="true">✓</span><h1>' + esc(d ? (t.title_diag || t.title) : t.title) + '</h1><p class="lead">' + esc(d ? (t.text_diag || t.text) : (sinDiagnostico && t.text_pending) || t.text) + '</p>';
     if (d) {
       h += '<section class="diag">' +
@@ -182,6 +196,21 @@
     return h;
   }
 
+  /* Modo entrevista con clave: diagnóstico completo para Richard (soluciones, orden, plan y nota interna) */
+  function completo(d) {
+    var n = d.nota_comercial || {};
+    var li = function (a, fn) { return (a || []).map(fn).join(''); };
+    return '<div class="thanks"><span class="mark" aria-hidden="true">✓</span><h1>Diagnóstico completo.</h1><p class="lead">Solo para ti. Al cliente se le enseña el resumen y las fugas; el cómo se cuenta hablando. También te llega por correo y al CRM.</p>' +
+      '<section class="diag"><p class="kicker">Resumen</p><p class="diag-sum">' + esc(d.resumen) + '</p>' +
+      '<h2 class="diag-h">Fugas y solución</h2><ol class="fugas">' + li(d.fugas, function (f) { return '<li><strong>' + esc(f.titulo) + '</strong><p>' + esc(f.por_que) + '</p><p class="imp">' + esc(f.impacto_mes) + '</p><p class="sol">' + esc(f.solucion) + '</p></li>'; }) + '</ol>' +
+      '<h2 class="diag-h">Qué va primero</h2><ol class="prio">' + li(d.prioridad, function (p) { return '<li><strong>' + esc(p.arreglo) + '</strong> · ' + esc(p.plazo) + '<p>' + esc(p.resuelve) + '</p></li>'; }) + '</ol>' +
+      '<h2 class="diag-h">Plan</h2><ol class="plan">' + li(d.plan, function (p) { return '<li><strong>' + esc(p.semana) + '</strong> · ' + esc(p.accion) + '<p>' + esc(p.quien) + ' · ' + esc(p.entregable) + '</p></li>'; }) + '</ol>' +
+      '<h2 class="diag-h">Primer paso</h2><p class="paso">' + esc(d.primer_paso) + '</p>' +
+      '<h2 class="diag-h">Nota interna</h2><p class="paso"><strong>Encaje ' + esc(n.encaje) + '</strong> · ' + esc(n.producto_sugerido) + '</p>' +
+      '<ul class="plan">' + li(n.preguntas_sesion, function (q) { return '<li>' + esc(q) + '</li>'; }) + '</ul><p class="diag-note">Alertas: ' + esc(n.alertas) + '</p></section>' +
+      '<div class="actions"><button type="button" class="btn btn--primary" onclick="window.print()">Imprimir o guardar PDF</button><a class="btn btn--line" href="' + location.pathname + location.search + '">Nueva entrevista</a></div></div>';
+  }
+
   /* El servidor responde al instante y prepara el diagnóstico detrás: preguntamos cada 4 s hasta 5 min */
   var ESPERA = ['Leyendo tus respuestas…', 'Calculando dónde se te va el dinero…', 'Comparando con negocios parecidos…', 'Redactando tu pre-diagnóstico…', 'Ya casi está, un momento más…'];
   function esperar(job) {
@@ -193,7 +222,7 @@
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, json: j }; }); })
         .then(function (res) {
           var j = res.json || {};
-          if (res.status === 200 && j.estado === 'listo') { diagnostico = j.diagnostico || null; sinDiagnostico = !diagnostico; return show(questions.length + 1); }
+          if (res.status === 200 && j.estado === 'listo') { clearDraft(); avisos = j; diagnostico = j.diagnostico || null; sinDiagnostico = !diagnostico; return show(questions.length + 1); }
           if (res.status === 404 || j.estado === 'error' || Date.now() - inicio > 300000) { sinDiagnostico = true; return show(questions.length + 1); }
           n += 1; setTimeout(tick, 4000);
         })
@@ -241,6 +270,7 @@
         inp.addEventListener('change', function () {
           Array.prototype.forEach.call($screen.querySelectorAll('.opt'), function (o) { o.classList.toggle('is-on', o.querySelector('input').checked); });
           document.getElementById('field').classList.remove('is-invalid'); setStatus('');
+          if (q.type === 'multi' && q.maxSel && $screen.querySelectorAll('.opt input:checked').length > q.maxSel) { inp.checked = false; inp.closest('.opt').classList.remove('is-on'); setStatus('Como mucho ' + q.maxSel + '. Quita una para marcar otra.'); return; }
           collect(q); saveDraft();
           if (q.type === 'single') setTimeout(function () { show(step + 1); }, 220);
         });
@@ -282,15 +312,16 @@
     var payload = {
       form: form.id, version: form.version, client: CLIENT_ID || null, lang: form.lang || 'es',
       answers: questions.map(function (q) { return { key: q.key, section: q.section, question: q.label, value: answers[q.key] === undefined ? '' : answers[q.key], answer: readable(q) }; }),
-      consent: { accepted: true, marketing: !!consent.marketing, version: consent.version, at: consent.at, text: form.consent.accept_label },
+      consent: { accepted: true, marketing: !!consent.marketing, version: consent.version, at: consent.at, text: (MODO && form.entrevista ? form.entrevista.accept_label : form.consent.accept_label) },
       meta: { url: location.href, referrer: document.referrer || '', sent_at: new Date().toISOString() },
+      modo: MODO || undefined, clave: MODO && CLAVE ? CLAVE : undefined,
       honeypot: ''
     };
     if (PREVIEW) { diagnostico = form.preview_diagnostico || null; setTimeout(function () { clearDraft(); show(questions.length + 1); }, 800); return; }
     fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.ok, status: r.status, json: j }; }); })
       .then(function (res) {
-        if (res.ok && res.json.pendiente && res.json.job) { clearDraft(); return esperar(res.json.job); }
+        if (res.ok && res.json.pendiente && res.json.job) return esperar(res.json.job);
         if (res.ok) { diagnostico = res.json.diagnostico || null; clearDraft(); show(questions.length + 1); return; }
         btn.disabled = false;
         if (res.status === 429) return setStatus('Demasiados envíos seguidos. Espera unos minutos y vuelve a intentarlo.');

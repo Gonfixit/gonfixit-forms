@@ -9,7 +9,7 @@ const label = (key, values) => {
 };
 const out = [];
 out.push('# Preguntas del cuestionario de diagnóstico', '');
-out.push(`Versión ${f.version}. Una pregunta por pantalla. Las marcadas con * son obligatorias. Las que indican «solo si…» aparecen según una respuesta anterior: el bloque «Cómo compra tu cliente» abre ramas distintas para citas, local, pedidos, presupuestos, encargos, estancias, online y cuotas. Cada bloque termina con un hueco de texto libre opcional y hay otros que se abren cuando una respuesta pide explicación.`, '');
+out.push(`Versión ${f.version}. Guion de entrevista: unas 38 preguntas visibles. Las «Notas de Richard» solo salen en modo entrevista (?modo=entrevista). Las marcadas con * son obligatorias. Las que indican «solo si…» aparecen según una respuesta anterior: el bloque «Cómo compra tu cliente» abre ramas distintas para citas, local, pedidos, presupuestos, encargos, estancias, online y cuotas. Cada bloque termina con un hueco de texto libre opcional y hay otros que se abren cuando una respuesta pide explicación.`, '');
 out.push('Generado con `node scripts/preguntas-md.cjs`; no editar a mano.', '');
 out.push('## Antes de empezar', '', f.consent.text, '', `- [ ] ${f.consent.accept_label} *`, `- [ ] ${f.consent.marketing_label}`, '');
 let n = 0;

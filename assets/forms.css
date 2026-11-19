@@ -116,6 +116,8 @@ textarea.in{resize:vertical;min-height:96px;font-size:clamp(18px,2.4vw,22px);lin
 .fugas,.prio{margin:0;padding:0 0 0 22px;display:grid;gap:12px}
 .fugas li,.prio li{font-size:15.5px;line-height:1.45}
 .fugas p,.prio p{margin:3px 0 0;color:var(--ink-soft)}
+.fugas .sol{color:var(--botella);font-weight:500}
+@media print{.top,.bottom,.actions{display:none!important}.diag{border:0;padding:0}}
 .fugas .imp{color:var(--orange-ink);font-weight:600}
 .plan{margin:0;padding:0 0 0 22px;display:grid;gap:10px}
 .plan li{font-size:15px;line-height:1.45}
